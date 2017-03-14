@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { ApiService } from '../../services/api';
+import { ApiService, Score } from '../../services/api';
 
 @Component({
   selector: 'page-home',
@@ -9,14 +9,15 @@ import { ApiService } from '../../services/api';
   providers: [ ApiService ],
 })
 export class HomePage {
-
+  public scores: Score[] = [];
   constructor(public navCtrl: NavController, public api: ApiService) {
 
   }
 
   ionViewDidLoad() {
-    this.api.fetchScores().subscribe((scores) => {
-      console.log(scores);
+    this.api.fetchScores().subscribe((scores: Score[]) => {
+      console.debug('Fetched scores: ', scores);
+      this.scores = scores;
     });
   }
 

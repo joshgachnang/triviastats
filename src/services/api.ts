@@ -25,7 +25,7 @@ export class ApiService {
 
   constructor(private http: Http) {}
 
-  public fetchScores(year?: number, hour?: number): Observable<Score> {
+  public fetchScores(year?: number, hour?: number): Observable<Score[]> {
     let url = `${this.url}scores`;
     if (year && hour) {
       url += `/${year}/${hour}`;
@@ -38,7 +38,7 @@ export class ApiService {
       .catch(this.apiError);
   }
 
-  private extractScores(res: Response) {
+  private extractScores(res: Response): Score[] {
     let scores: Score[] = [];
     for (let score of res.json().results) {
       scores.push(new Score(score));
