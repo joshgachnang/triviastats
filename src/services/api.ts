@@ -8,13 +8,14 @@ export class Score {
   public hour: number;
   public team_name: string;
   public place: number;
-
+  public score: number;
 
   constructor(data) {
     this.year = data.year;
     this.hour = data.hour;
     this.team_name = data.team_name;
     this.place = data.place;
+    this.score = data.score;
   }
 }
 

@@ -6,6 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { CountdownComponent, CountdownPipe, TimeToTriviaPipe } from '../pages/home/countdown.component';
+import { TwitterWidgetComponent } from '../pages/home/twitter-widget.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CountdownComponent, CountdownPipe, TimeToTriviaPipe } from '../pages/ho
     CountdownComponent,
     TimeToTriviaPipe,
     CountdownPipe,
+    TwitterWidgetComponent,
   ],
   imports: [
     IonicModule.forRoot(MyApp)

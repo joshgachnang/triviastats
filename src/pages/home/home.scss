@@ -1,3 +1,13 @@
 page-home {
-
+  .twitter-widget-card, ion-card {
+    max-width: 800px;
+    margin: 20 auto;
+  }
+  ion-card-header {
+    background-color: color($colors, primary);
+    color: #fff;
+  }
+  .twitter-timeline-container {
+    padding: 20px;
+  }
 }

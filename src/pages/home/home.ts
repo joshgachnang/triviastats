@@ -21,4 +21,12 @@ export class HomePage {
     });
   }
 
+  public teamSelected(team: any) {
+    console.log('selected', team);
+  }
+
+  public allScores() {
+    console.log('all scores');
+  }
+
 }
