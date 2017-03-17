@@ -1,3 +1,5 @@
+$max-mobile-width: 736px;
+
 page-home {
   .twitter-widget-card, ion-card {
     max-width: 800px;
@@ -9,5 +11,26 @@ page-home {
   }
   .twitter-timeline-container {
     padding: 20px;
+  }
+
+  .about p {
+    margin-bottom: 15px;
+  }
+
+  .scores-content {
+    padding: 10px 0;
+  }
+
+  // Fix some things on mobile
+  @media only screen and (max-width: $max-mobile-width) {
+    .scores-content .item-md,
+    .scores-content .item-ios {
+      font-size: 80%;
+      padding-left: 5px;
+    }
+
+    .scores-content .score {
+      display: none;
+    }
   }
 }

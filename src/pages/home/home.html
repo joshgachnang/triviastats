@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-card>
     <ion-card-header color="white">
       Trivia Countdown
@@ -17,12 +17,12 @@
     <ion-card-header color="white">
       <span class='scores-card-header'> Top Teams for Hour {{ scores[0]?.hour }}, {{ scores[0]?.year }}</span>
     </ion-card-header>
-    <ion-card-content padding>
+    <ion-card-content class='scores-content'>
       <ion-list>
-        <span *ngFor="let score of scores; let i = index;">
+        <span *ngFor="let score of scores; let i = index;" class='score-item'>
           <button ion-item *ngIf="i < 10" (click)="teamSelected(score)">
             {{ score.place }}: {{ score.team_name }}
-            <ion-badge item-right>{{ score.score }}</ion-badge>
+            <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
           </button>
         </span>
       </ion-list>
@@ -45,9 +45,9 @@
     <ion-card-header color="white">
       About
     </ion-card-header>
-    <ion-card-content padding>
-      <p>This site provides historical data and notifcations for the World's
-				 Largest Trivia Contest, run by WWSP 90FM. Trivia is a 54 hour long
+    <ion-card-content padding class='about'>
+      <p>This site provides historical data and notifcations for the <a href="http://90fmtrivia.org">World's
+				 Largest Trivia Contest</a>, run by WWSP 90FM. Trivia is a 54 hour long
 				 contest, where 8 questions an hour are aired over the radio, and teams
          call in the answers. Teams can be any size and use the Internet to
          find answers. For more info, see the official Trivia website.
@@ -58,5 +58,4 @@
 			<p>Built by <a href="http://www.servercobra.com">Josh Gachnang</a></p>
     </ion-card-content>
   </ion-card>
-
 </ion-content>
