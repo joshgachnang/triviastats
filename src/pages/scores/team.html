@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Trivia Stats</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      {{ team_name }}, {{ year }}
+    </ion-card-header>
+    <ion-list>
+      <span *ngFor="let score of scores;" class='score-item'>
+        <button ion-item>
+          <ion-badge class='hour'>{{ score.hour }}</ion-badge>
+          <ion-badge class='place'>{{ score.place }}</ion-badge>
+          <span>{{ score.score }}</span>
+        </button>
+      </span>
+    </ion-list>
+  </ion-card>
+</ion-content>

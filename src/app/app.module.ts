@@ -41,7 +41,7 @@ const cloudSettings: CloudSettings = {
     ContactPage,
     HomePage,
     TabsPage,
-    TeamScorePag
+    TeamScorePage,
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

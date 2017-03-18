@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { ApiService, Score } from '../../services/api';
+import { TeamScorePage } from '../scores/team';
 
 @Component({
   selector: 'page-home',
@@ -23,6 +24,7 @@ export class HomePage {
 
   public teamSelected(team: any) {
     console.log('selected', team);
+    this.navCtrl.push(TeamScorePage, {year: team.year, team_name: team.team_name});
   }
 
   public allScores() {
