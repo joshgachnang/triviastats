@@ -11,9 +11,8 @@ import { TeamScorePage } from '../scores/team';
 })
 export class HomePage {
   public scores: Score[] = [];
-  constructor(public navCtrl: NavController, public api: ApiService) {
 
-  }
+  constructor(public navCtrl: NavController, public api: ApiService) {}
 
   ionViewDidLoad() {
     this.api.fetchScores().subscribe((scores: Score[]) => {

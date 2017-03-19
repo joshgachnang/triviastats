@@ -10,6 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { CountdownComponent, CountdownPipe, TimeToTriviaPipe } from '../pages/home/countdown.component';
 import { TwitterWidgetComponent } from '../pages/home/twitter-widget.component';
 import { TeamScorePage } from '../pages/scores/team';
+import { AuthComponent } from '../pages/auth/auth';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -29,6 +30,7 @@ const cloudSettings: CloudSettings = {
     TimeToTriviaPipe,
     CountdownPipe,
     TwitterWidgetComponent,
+    AuthComponent,
   ],
   imports: [
     IonicModule.forRoot(MyApp),

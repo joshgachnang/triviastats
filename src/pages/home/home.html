@@ -13,6 +13,7 @@
       <countdown></countdown>
     </ion-card-content>
   </ion-card>
+	<auth *ngIf="!user || !user.isAuthenticated()"></auth>
   <ion-card>
     <ion-card-header color="white">
       <span class='scores-card-header'> Top Teams for Hour {{ scores[0]?.hour }}, {{ scores[0]?.year }}</span>

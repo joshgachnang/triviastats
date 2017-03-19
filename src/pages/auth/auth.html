@@ -1,0 +1,53 @@
+<ion-card>
+  <ion-card-header color="white">
+    <span *ngIf="view === 'signup'">Signup</span>
+    <span *ngIf="view === 'login'">Login</span>
+    <span *ngIf="view === 'profile'">Profile</span>
+  </ion-card-header>
+  <ion-card-content padding>
+    <div *ngIf="view === 'signup'">
+    <p>Sign up to get notifications when new scores are posted for your team!</p>
+      <form (ngSubmit)="signup()">
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="details.email" name="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input type="text" [(ngModel)]="details.password" name="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Team Name</ion-label>
+          <ion-input type="text" max-length="36" [(ngModel)]="team_name" name="team_name"></ion-input>
+        </ion-item>
+        <button ion-button type="submit" block>Sign Up!</button>
+      </form>
+      <button ion-button clear color="secondary" (click)="showLogin()">Login</button>
+    </div>
+    <div *ngIf="view === 'login'">
+      <form (ngSubmit)="login()">
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="details.email" name="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input type="text" [(ngModel)]="details.password" name="password"></ion-input>
+        </ion-item>
+        <button ion-button type="submit" block>Login</button>
+      </form>
+      <button ion-button clear color="secondary" (click)="showSignup()">Signup</button>
+    </div>
+    <div *ngIf="view === 'profile'">
+      <form (ngSubmit)="saveProfile()">
+       <ion-item>
+          <ion-label>Team Name</ion-label>
+          <ion-input type="text" [(ngModel)]="team_name" name="team_name"></ion-input>
+        </ion-item>
+        <button ion-button type="submit" block>Save</button>
+      </form>
+      <button ion-button clear color="secondary" (click)="logout()">Logout</button>
+
+    </div>
+  </ion-card-content>
+</ion-card>
