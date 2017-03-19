@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Scores for Hour {{ hour }}, {{ year }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <span *ngFor="let score of scores" class='score-item'>
+        <button ion-item (click)="teamSelected(score)">
+          {{ score.place }}: {{ score.team_name }}
+          <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
+        </button>
+      </span>
+    </ion-list>
+  </ion-card>
+</ion-content>

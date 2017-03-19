@@ -10,6 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { CountdownComponent, CountdownPipe, TimeToTriviaPipe } from '../pages/home/countdown.component';
 import { TwitterWidgetComponent } from '../pages/home/twitter-widget.component';
 import { TeamScorePage } from '../pages/scores/team';
+import { HourScorePage } from '../pages/scores/hour';
 import { AuthComponent } from '../pages/auth/auth';
 
 const cloudSettings: CloudSettings = {
@@ -26,6 +27,7 @@ const cloudSettings: CloudSettings = {
     HomePage,
     TabsPage,
     TeamScorePage,
+    HourScorePage,
     CountdownComponent,
     TimeToTriviaPipe,
     CountdownPipe,
@@ -44,6 +46,7 @@ const cloudSettings: CloudSettings = {
     HomePage,
     TabsPage,
     TeamScorePage,
+    HourScorePage,
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
