@@ -16,6 +16,8 @@ import * as moment from 'moment';
   styles: [`
     .countdown {
       font-size: 125%;
+      display: block;
+      min-width: 250px;
     }
   `],
   providers: [ ],

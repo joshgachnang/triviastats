@@ -9,45 +9,70 @@
     <p>Sign up to get notifications when new scores are posted for your team!</p>
       <form (ngSubmit)="signup()">
         <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-input type="text" [(ngModel)]="details.email" name="email"></ion-input>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="details.email" name="email" autofocus></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Password</ion-label>
+          <ion-label floating>Password</ion-label>
           <ion-input type="text" [(ngModel)]="details.password" name="password"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Team Name</ion-label>
+          <ion-label floating>Team Name</ion-label>
           <ion-input type="text" max-length="36" [(ngModel)]="team_name" name="team_name"></ion-input>
         </ion-item>
-        <button ion-button type="submit" block>Sign Up!</button>
+        <ion-row>
+          <ion-col col-md-6 offset-md-3 col-xs-10 offset-xs-1 text-center center>
+            <button ion-button type="submit" color="secondary" block>Sign Up!</button>
+          </ion-col>
+        </ion-row>
+
       </form>
-      <button ion-button clear color="secondary" (click)="showLogin()">Login</button>
+      <ion-row>
+        <ion-col col-md-6 offset-md-3 col-xs-10 offset-xs-1 text-center center>
+          <button ion-button outline block color="primary" (click)="showLogin()">Login</button>
+        </ion-col>
+      </ion-row>
     </div>
     <div *ngIf="view === 'login'">
       <form (ngSubmit)="login()">
         <ion-item>
           <ion-label>Email</ion-label>
-          <ion-input type="text" [(ngModel)]="details.email" name="email"></ion-input>
+          <ion-input type="text" [(ngModel)]="details.email" name="email" autofocus></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Password</ion-label>
           <ion-input type="text" [(ngModel)]="details.password" name="password"></ion-input>
         </ion-item>
-        <button ion-button type="submit" block>Login</button>
+        <ion-row>
+          <ion-col col-md-6 offset-md-3 col-xs-10 offset-xs-1 text-center center>
+            <button ion-button color="secondary" type="submit" block>Login</button>
+          </ion-col>
+        </ion-row>
       </form>
-      <button ion-button clear color="secondary" (click)="showSignup()">Signup</button>
+      <ion-row>
+        <ion-col col-md-6 offset-md-3 col-xs-10 offset-xs-1 text-center center>
+          <button ion-button outline block (click)="showSignup()">Signup</button>
+        </ion-col>
+      </ion-row>
     </div>
     <div *ngIf="view === 'profile'">
       <form (ngSubmit)="saveProfile()">
-       <ion-item>
+        <ion-item>
           <ion-label>Team Name</ion-label>
           <ion-input type="text" [(ngModel)]="team_name" name="team_name"></ion-input>
         </ion-item>
-        <button ion-button type="submit" block>Save</button>
-      </form>
-      <button ion-button clear color="secondary" (click)="logout()">Logout</button>
+        <ion-row>
+          <ion-col col-md-6 offset-md-3 col-xs-10 offset-xs-1 text-center center>
 
+            <button ion-button type="submit" block>Save</button>
+          </ion-col>
+        </ion-row>
+      </form>
+      <ion-row>
+        <ion-col col-md-6 offset-md-3 col-xs-10 offset-xs-1 text-center center>
+          <button ion-button outline block color="secondary" (click)="logout()">Logout</button>
+        </ion-col>
+      </ion-row>
     </div>
   </ion-card-content>
 </ion-card>
