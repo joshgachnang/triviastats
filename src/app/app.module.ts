@@ -8,7 +8,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { CountdownComponent, CountdownPipe, TimeToTriviaPipe } from '../pages/home/countdown.component';
 import { TwitterWidgetComponent } from '../pages/home/twitter-widget.component';
 import { TeamScorePage } from '../pages/scores/team';
-import { HourScorePage } from '../pages/scores/hour';
 import { AuthComponent } from '../pages/auth/auth';
 import { RulesPage } from '../pages/rules/rules';
 import { ScoresPage } from '../pages/scores/scores';
@@ -25,7 +24,6 @@ const cloudSettings: CloudSettings = {
     HomePage,
     TabsPage,
     TeamScorePage,
-    HourScorePage,
     RulesPage,
     ScoresPage,
     CountdownComponent,
@@ -44,7 +42,6 @@ const cloudSettings: CloudSettings = {
     HomePage,
     TabsPage,
     TeamScorePage,
-    HourScorePage,
     RulesPage,
     ScoresPage,
   ],

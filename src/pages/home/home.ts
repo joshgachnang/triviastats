@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { ApiService, Score } from '../../services/api';
 import { TeamScorePage } from '../scores/team';
-import { HourScorePage } from '../scores/hour';
+import { ScoresPage } from '../scores/scores';
 
 @Component({
   selector: 'page-home',
@@ -28,7 +28,7 @@ export class HomePage {
   }
 
   public allScores() {
-    this.navCtrl.push(HourScorePage, {year: this.scores[0].year, hour: this.scores[0].hour});
+    this.navCtrl.push(ScoresPage, {year: this.scores[0].year, hour: this.scores[0].hour});
     console.log('all scores');
   }
 
