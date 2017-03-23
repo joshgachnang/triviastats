@@ -2,6 +2,10 @@ import { Auth, User, UserDetails, IDetailedError } from "@ionic/cloud-angular";
 import { Component } from "@angular/core";
 import { ToastController } from "ionic-angular";
 
+interface UserData {
+  team_name: string;
+}
+
 @Component({
    selector: "auth",
    templateUrl: "auth.html",
@@ -11,7 +15,14 @@ export class AuthComponent {
   public details: UserDetails = {};
   public view: string = "signup";
 
-  constructor(public auth: Auth, public user: User, private toastCtrl: ToastController) {}
+  constructor(public auth: Auth, public user: User, private toastCtrl: ToastController) {
+    console.log('user authed?', user, auth, auth.isAuthenticated());
+    if (auth.isAuthenticated()) {
+      this.view = "profile";
+      let userData = user.data.data as UserData;
+      this.team_name = userData.team_name;
+    }
+  }
 
   public signup() {
     console.debug(`Signing up: ${this.details}`);
@@ -65,6 +76,8 @@ export class AuthComponent {
       console.info("Login success");
       this.toast("Welcome back!");
       this.view = "profile";
+      let userData = this.user.data.data as UserData;
+      this.team_name = userData.team_name;
     }).catch((e) => {
       console.error(`login error: ${e}`);
       this.toast("Error logging in, please try again");
@@ -75,6 +88,8 @@ export class AuthComponent {
     this.auth.logout();
     this.toast("Logged out! Come back soon!");
     this.view = "signup";
+    this.details = {};
+    this.team_name = "";
   }
 
   public showLogin() {

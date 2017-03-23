@@ -19,3 +19,8 @@ ion-card-header {
   background-color: color($colors, primary);
   color: #fff;
 }
+
+.card-header-md,
+.card-header.ios {
+  color: #fff;
+}
