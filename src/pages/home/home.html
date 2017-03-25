@@ -7,7 +7,7 @@
 <ion-content >
   <ion-grid>
   <ion-row>
-    <ion-col col-lg-6 col-xs-12>
+    <ion-col col-12 col-lg>
       <ion-card>
         <ion-card-header color="white">
           Trivia Countdown
@@ -17,12 +17,12 @@
         </ion-card-content>
       </ion-card>
     </ion-col>
-    <ion-col col-lg-6 col-xs-12>
+    <ion-col col-12 col-lg>
       <auth *ngIf="!user || !user.isAuthenticated()"></auth>
     </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col col-lg-6 col-xs-12>
+  <ion-row wrap>
+    <ion-col col-12 col-lg>
       <ion-card>
         <ion-card-header color="white">
           <span class='scores-card-header'> Top Teams for Hour {{ scores[0]?.hour }}, {{ scores[0]?.year }}</span>
@@ -46,7 +46,7 @@
         </ion-row>
       </ion-card>
     </ion-col>
-    <ion-col col-lg-6 col-xs-12>
+    <ion-col col-12 col-lg>
       <ion-card class='twitter-widget-card'>
         <ion-card-header color="white">
           Trivia Tweets
@@ -55,8 +55,8 @@
       </ion-card>
     </ion-col>
   </ion-row>
-  <ion-row>
-    <ion-col col-lg-6 offset-lg-3 col-xs-12>
+  <ion-row wrap>
+    <ion-col col-12 col-lg-6 offset-lg-3 col-lg>
       <ion-card>
         <ion-card-header color="white">
           About
