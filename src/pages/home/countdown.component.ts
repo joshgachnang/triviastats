@@ -6,18 +6,30 @@ import * as moment from 'moment';
 @Component({
   selector: 'countdown',
   template: `
-    <div class='countdown'>
+    <div class='row countdown-date'>
       <span class='days'>{{ date | async | timeToTrivia | countdown:'days' }} days</span>
+    </div>
+    <div class='row countdown-time'>
       <span class='hours'>{{ date | async | timeToTrivia | countdown:'hours' }}</span>:
       <span class='minutes'>{{ date | async | timeToTrivia | countdown:'minutes' }}</span>:
       <span class='seconds'>{{ date | async | timeToTrivia | countdown:'seconds' }}</span>
     </div>
   `,
   styles: [`
-    .countdown {
-      font-size: 125%;
+    .countdown-date {
+      font-size: 300%;
+      font-weight: bold;
       display: block;
       min-width: 250px;
+      width: 100%;
+      text-align: center;
+    }
+    .countdown-time {
+      font-size: 250%;
+      font-weight: bold;
+      display: block;
+      width: 100%;
+      text-align: center;
     }
   `],
   providers: [ ],
