@@ -74,5 +74,21 @@
         </ion-col>
       </ion-row>
     </div>
+    <ion-grid *ngIf="view === 'browser'" class="browser-view">
+      <ion-row>
+        Download the Trivia Stats mobile app to get notifications of your team's score each hour!
+      </ion-row>
+      <ion-row>
+        <ion-col class="col-6 align-items-center ">
+          iOS coming soon!
+          <ion-icon class="ios-download" ios="ios-appstore" md="ios-appstore"></ion-icon>
+
+        </ion-col>
+        <ion-col class="col-6">
+          Android coming soon!
+          <ion-icon class="android-download" ios="md-appstore" md="md-appstore"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card-content>
 </ion-card>

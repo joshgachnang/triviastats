@@ -1,6 +1,6 @@
 import { Auth, User, UserDetails, IDetailedError } from "@ionic/cloud-angular";
 import { Component } from "@angular/core";
-import { ToastController } from "ionic-angular";
+import { Platform, ToastController } from "ionic-angular";
 
 interface UserData {
   team_name: string;
@@ -9,13 +9,31 @@ interface UserData {
 @Component({
    selector: "auth",
    templateUrl: "auth.html",
+   styles: [`
+     .browser-view {
+       width: 100%;
+       text-align: center;
+     }
+     .android-download {
+       display: block;
+       width: 100%;
+       font-size: 500%;
+       text-align: center;
+     }
+     .ios-download {
+       display: block;
+       width: 100%;
+       font-size: 500%;
+       text-align: center;
+     }
+   `],
  })
 export class AuthComponent {
   public team_name: string;
   public details: UserDetails = {};
-  public view: string = "signup";
+  public view: string = this.isBrowser() ? "browser" : "signup";
 
-  constructor(public auth: Auth, public user: User, private toastCtrl: ToastController) {
+  constructor(public auth: Auth, public user: User, private plt: Platform, private toastCtrl: ToastController) {
     console.log('user authed?', user, auth, auth.isAuthenticated());
     if (auth.isAuthenticated()) {
       this.view = "profile";
@@ -104,5 +122,12 @@ export class AuthComponent {
     this.user.save().then(() => {
       this.toast("Ok! Saved your profile!");
     });
+  }
+
+  private isBrowser() {
+    if (this.plt.is('core') || this.plt.is('mobileweb')) {
+      return true;
+    }
+    return false;
   }
 }
