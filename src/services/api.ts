@@ -29,13 +29,13 @@ export class ApiService {
   public fetchScores(year?: number, hour?: number, team_name?: string): Observable<Score[]> {
     let url = `${this.url}scores/?${this.defaultOrdering}`;
     if (year) {
-    	url += `&year=${year}`;
+      url += `&year=${year}`;
     }
     if (hour) {
-    	url += `&hour=${hour}`;
+      url += `&hour=${hour}`;
     }
     if (team_name) {
-    	url += `&team_name=${encodeURIComponent(team_name)}`;
+      url += `&team_name=${encodeURIComponent(team_name)}`;
     }
 
     console.debug(`Fetching url: ${url}`);
