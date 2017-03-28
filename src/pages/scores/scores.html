@@ -1,19 +1,37 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title *ngIf="scores.length > 0">Scores for Hour {{ scores[0].hour }}, {{ scores[0].year }}</ion-title>
-    <ion-title *ngIf="scores.length === 0">Loading scores..</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-    <ion-list>
-      <span *ngFor="let score of scores" class='score-item'>
-        <button ion-item (click)="teamSelected(score)">
-          {{ score.place }}: {{ score.team_name }}
-          <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
+    <ion-card-content>
+      <form (ngSubmit)="searchTeams()">
+        <ion-item>
+          <ion-input placeholder="Search teams.." type="text" [(ngModel)]="searchName" name="searchName"></ion-input>
+        </ion-item>
+        <button ion-button outline class="search-button">
+          Search
         </button>
-      </span>
-    </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <span *ngFor="let score of scores" class='score-item'>
+          <button ion-item (click)="teamSelected(score)">
+            <span *ngIf="searchResults">
+              {{ score.team_name }}, {{ score.year }}
+            </span>
+            <span *ngIf="!searchResults">
+              {{ score.place }}: {{ score.team_name }}
+              <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
+            </span>
+          </button>
+        </span>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 </ion-content>

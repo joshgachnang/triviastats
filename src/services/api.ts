@@ -26,7 +26,7 @@ export class ApiService {
 
   constructor(private http: Http) {}
 
-  public fetchScores(year?: number, hour?: number, team_name?: string): Observable<Score[]> {
+  public fetchScores(year?: number, hour?: number, team_name?: string, search_name?: string): Observable<Score[]> {
     let url = `${this.url}scores/?${this.defaultOrdering}`;
     if (year) {
       url += `&year=${year}`;
@@ -36,6 +36,9 @@ export class ApiService {
     }
     if (team_name) {
       url += `&team_name=${encodeURIComponent(team_name)}`;
+    }
+    if (search_name) {
+      url += `&search=${encodeURIComponent(search_name)}`;
     }
 
     console.debug(`Fetching url: ${url}`);
