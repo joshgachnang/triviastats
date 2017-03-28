@@ -19,12 +19,24 @@ interface UserData {
        width: 100%;
        font-size: 500%;
        text-align: center;
+       color: #FCB100;
+       text-decoration: none;
      }
      .ios-download {
        display: block;
        width: 100%;
-       font-size: 500%;
        text-align: center;
+       color: #FCB100;
+       text-decoration: none;
+     }
+     .download-icon {
+       font-size: 500%;
+     }
+     .download-label {
+       width: 100%;
+       font-weight: bold;
+       font-size: 200%;
+       display: block;
      }
    `],
  })
