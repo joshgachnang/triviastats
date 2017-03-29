@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { Auth, Deploy, User } from '@ionic/cloud-angular';
 
 import { ApiService, Score } from '../../services/api';
@@ -15,10 +15,12 @@ export class HomePage {
   public scores: Score[] = [];
 
   constructor(public navCtrl: NavController, public api: ApiService, public deploy: Deploy, public authA: Auth,
-              public userA: User) {}
+              public userA: User, public plt: Platform) {}
 
   ionViewDidLoad() {
-    this.checkForNewVersion();
+    if (!this.isBrowser()) {
+      this.checkForNewVersion();
+    }
     this.api.fetchScores().subscribe((scores: Score[]) => {
       console.debug('Fetched scores: ', scores);
       this.scores = scores;
@@ -51,5 +53,12 @@ export class HomePage {
         console.debug('no new version');
       }
     });
+  }
+
+  private isBrowser() {
+    if (this.plt.is('core') || this.plt.is('mobileweb')) {
+      return true;
+    }
+    return false;
   }
 }
