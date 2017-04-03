@@ -4,77 +4,78 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
   <ion-grid>
-  <ion-row>
-    <ion-col col-12 col-lg>
-      <ion-card>
-        <ion-card-header color="white">
-          Trivia Countdown
-        </ion-card-header>
-        <ion-card-content padding>
-          <countdown></countdown>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col col-12 col-lg>
-      <auth *ngIf="!user || !user.isAuthenticated()"></auth>
-    </ion-col>
-  </ion-row>
-  <ion-row wrap>
-    <ion-col col-12 col-lg>
-      <ion-card>
-        <ion-card-header color="white">
-          <span class='scores-card-header'> Top Teams for Hour {{ scores[0]?.hour }}, {{ scores[0]?.year }}</span>
-        </ion-card-header>
-        <ion-card-content class='scores-content'>
-          <ion-list>
-            <span *ngFor="let score of scores; let i = index;" class='score-item'>
-              <button ion-item *ngIf="i < 10" (click)="teamSelected(score)">
-                {{ score.place }}: {{ score.team_name }}
-                <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
+    <ion-row>
+      <ion-col col-12 col-lg>
+        <auth *ngIf="!user || !user.isAuthenticated()"></auth>
+      </ion-col>
+      <ion-col col-12 col-lg>
+        <ion-card>
+          <ion-card-header color="white">
+            Trivia Countdown
+          </ion-card-header>
+          <ion-card-content padding>
+            <countdown></countdown>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+    <ion-row wrap>
+      <ion-col col-12 col-lg>
+        <ion-card>
+          <ion-card-header color="white">
+            <span class='scores-card-header'> Top Teams for Hour {{ scores[0]?.hour }}, {{ scores[0]?.year }}</span>
+          </ion-card-header>
+          <ion-card-content class='scores-content'>
+            <ion-list>
+              <span *ngFor="let score of scores; let i = index;" class='score-item'>
+                <button ion-item *ngIf="i < 10" (click)="teamSelected(score)">
+                  {{ score.place }}: {{ score.team_name }}
+                  <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
+                </button>
+              </span>
+            </ion-list>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button clear (click)="allScores()">
+                <div>See all scores</div>
               </button>
-            </span>
-          </ion-list>
-        </ion-card-content>
-        <ion-row>
-          <ion-col>
-            <button ion-button clear (click)="allScores()">
-              <div>See all scores</div>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-col>
-    <ion-col col-12 col-lg>
-      <ion-card class='twitter-widget-card'>
-        <ion-card-header color="white">
-          Trivia Tweets
-        </ion-card-header>
-        <twitter-widget></twitter-widget>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-row wrap>
-    <ion-col col-12 col-lg-6 offset-lg-3 col-lg>
-      <ion-card>
-        <ion-card-header color="white">
-          About
-        </ion-card-header>
-        <ion-card-content padding class='about'>
-          <p>This site provides historical data and notifcations for the <a href="http://90fmtrivia.org">World's
-             Largest Trivia Contest</a>, run by WWSP 90FM. Trivia is a 54 hour long
-             contest, where 8 questions an hour are aired over the radio, and teams
-             call in the answers. Teams can be any size and use the Internet to
-             find answers. For more info, see the official Trivia website.
-          </p>
-          <p>This app is completely open source.
-              <a href="https://github.com/pcsforeducation/triviastats">You can view the source here.</a>
-          </p>
-          <p>Built by <a href="http://www.servercobra.com">Josh Gachnang</a></p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 col-lg>
+        <ion-card class='twitter-widget-card'>
+          <ion-card-header color="white">
+            Trivia Tweets
+          </ion-card-header>
+          <twitter-widget></twitter-widget>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row wrap>
+      <ion-col col-12 col-lg-6 offset-lg-3 col-lg>
+        <ion-card>
+          <ion-card-header color="white">
+            About
+          </ion-card-header>
+          <ion-card-content padding class='about'>
+            <p>This site provides historical data and notifcations for the <a href="http://90fmtrivia.org">World's
+               Largest Trivia Contest</a>, run by WWSP 90FM. Trivia is a 54 hour long
+               contest, where 8 questions an hour are aired over the radio, and teams
+               call in the answers. Teams can be any size and use the Internet to
+               find answers. For more info, see the official Trivia website.
+            </p>
+            <p>This app is completely open source.
+                <a href="https://github.com/pcsforeducation/triviastats">You can view the source here.</a>
+            </p>
+            <p>Built by <a href="http://www.servercobra.com">Josh Gachnang</a></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

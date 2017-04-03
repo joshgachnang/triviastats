@@ -1,6 +1,6 @@
-import { Auth, User, UserDetails, IDetailedError } from "@ionic/cloud-angular";
-import { Component } from "@angular/core";
-import { Platform, ToastController } from "ionic-angular";
+import { Auth, Push, PushToken, User, UserDetails, IDetailedError } from "@ionic/cloud-angular";
+import { Component, ViewChild } from "@angular/core";
+import { Content, Platform, Tabs, ToastController } from "ionic-angular";
 
 interface UserData {
   team_name: string;
@@ -45,12 +45,15 @@ export class AuthComponent {
   public details: UserDetails = {};
   public view: string = this.isBrowser() ? "browser" : "signup";
 
-  constructor(public auth: Auth, public user: User, private plt: Platform, private toastCtrl: ToastController) {
+  constructor(public auth: Auth, public user: User, private plt: Platform, public push: Push,
+              private toastCtrl: ToastController) {
     console.log('user authed?', user, auth, auth.isAuthenticated());
     if (auth.isAuthenticated()) {
       this.view = "profile";
       let userData = user.data.data as UserData;
       this.team_name = userData.team_name;
+      console.log('did load');
+      this.registerForPush();
     }
   }
 
@@ -108,6 +111,7 @@ export class AuthComponent {
       this.view = "profile";
       let userData = this.user.data.data as UserData;
       this.team_name = userData.team_name;
+      this.registerForPush();
     }).catch((e) => {
       console.error(`login error: ${e}`);
       this.toast("Error logging in, please try again");
@@ -115,6 +119,7 @@ export class AuthComponent {
   }
 
   public logout() {
+    this.push.unregister();
     this.auth.logout();
     this.toast("Logged out! Come back soon!");
     this.view = "signup";
@@ -136,10 +141,28 @@ export class AuthComponent {
     });
   }
 
+  public scrollTo(id) {
+    let element = document.getElementById(id);
+    console.log("SCROLL", element);
+    element.scrollIntoView();
+  }
+
   private isBrowser() {
     if (this.plt.is('core') || this.plt.is('mobileweb')) {
       return true;
     }
     return false;
+  }
+
+  private registerForPush() {
+    if (!this.plt.is('cordova')) {
+      console.debug('Not on a device, not registering for push');
+      return;
+    }
+    this.push.register().then((t: PushToken) => {
+      return this.push.saveToken(t);
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
   }
 }

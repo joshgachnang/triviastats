@@ -15,8 +15,22 @@ import { ScoresPage } from '../pages/scores/scores';
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': 'ee03ee3c'
+  },
+  'push': {
+    'sender_id': '100362448228',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#47274C'
+      }
+    }
   }
 };
+
+
 
 @NgModule({
   declarations: [

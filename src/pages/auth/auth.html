@@ -5,17 +5,17 @@
     <span *ngIf="view === 'profile'">Profile</span>
     <span *ngIf="view === 'browser'">Get Score Notifications!</span>
   </ion-card-header>
-  <ion-card-content padding>
+  <ion-card-content padding id="content">
     <div *ngIf="view === 'signup'">
     <p>Sign up to get notifications when new scores are posted for your team!</p>
       <form (ngSubmit)="signup()">
-        <ion-item>
+        <ion-item >
           <ion-label floating>Email</ion-label>
-          <ion-input type="text" [(ngModel)]="details.email" name="email"></ion-input>
+          <ion-input type="text" [(ngModel)]="details.email" name="email" id="email" ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Password</ion-label>
-          <ion-input type="text" [(ngModel)]="details.password" name="password"></ion-input>
+          <ion-input type="password" [(ngModel)]="details.password" name="password"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Team Name</ion-label>
@@ -42,7 +42,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Password</ion-label>
-          <ion-input type="text" [(ngModel)]="details.password" name="password"></ion-input>
+          <ion-input type="password" [(ngModel)]="details.password" name="password"></ion-input>
         </ion-item>
         <ion-row>
           <ion-col col-md-6 offset-md-3 col-xs-10 offset-xs-1 text-center center>
