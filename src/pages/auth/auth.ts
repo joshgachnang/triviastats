@@ -17,7 +17,6 @@ interface UserData {
      .android-download {
        display: block;
        width: 100%;
-       font-size: 500%;
        text-align: center;
        color: #FCB100;
        text-decoration: none;
@@ -37,6 +36,10 @@ interface UserData {
        font-weight: bold;
        font-size: 200%;
        display: block;
+     }
+     .center {
+       text-align: center;
+       width: 100%;
      }
    `],
  })
