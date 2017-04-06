@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 
+import { TrackingService } from '../../services/tracking';
 import { ApiService, Score } from '../../services/api';
 import { TeamScorePage } from '../scores/team';
 
 @Component({
   selector: 'hour-scores',
   templateUrl: 'scores.html',
-  providers: [ ApiService ],
+  providers: [ ApiService, TrackingService ],
   styles: [`
     .search-button {
       /* line up with form above */
@@ -24,11 +25,12 @@ export class ScoresPage {
   public title: string;
 
   constructor(public navCtrl: NavController, public api: ApiService,
-      private navParams: NavParams, public toastCtrl: ToastController) {}
+      private navParams: NavParams, public toastCtrl: ToastController, private tracking: TrackingService) {}
 
   ionViewDidLoad() {
     this.year = this.navParams.get('year');
     this.hour = this.navParams.get('hour');
+    this.tracking.track("ViewScores", {year: this.year, hour: this.hour, searchName: this.searchName});
 
     this.title = "Loading..";
 
@@ -44,6 +46,7 @@ export class ScoresPage {
         });
   }
   public teamSelected(team: any) {
+    this.tracking.track("ClickTeamScores", {year: team.year, team_name: team.team_name});
     this.navCtrl.push(TeamScorePage, {year: team.year, team_name: team.team_name});
   }
 
@@ -52,6 +55,7 @@ export class ScoresPage {
       this.toast('Gotta enter a team name to search!');
       return;
     }
+    this.tracking.track("SearchTeam", {team_name: this.searchName});
     this.api.fetchScores(undefined, undefined, undefined, this.searchName)
         .subscribe((scores: Score[]) => {
           this.searchResults = true;
@@ -69,16 +73,13 @@ export class ScoresPage {
 
           // Pick the latest one and add to the list
           for (let teamyear of Object.keys(scoreMap)) {
-            console.log("TEAMYEAR", scoreMap, teamyear, scoreMap[teamyear]);
             let teamyear_scores = scoreMap[teamyear].sort((a,b) => b - a);
             if (teamyear_scores.length === 0) continue;
-            console.log("SAVING", teamyear_scores[0]);
             this.scores.push(teamyear_scores[0]);
           }
 
           // Finally, sort by year
           this.scores = this.scores.sort((a,b) => b.year - a.year);
-          console.log("THISSCORES", this.scores);
 
           this.title = this.searchName;
         });

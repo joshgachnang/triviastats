@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
+import { TrackingService } from '../../services/tracking';
+
 
 @Component({
   selector: 'rules',
   templateUrl: 'rules.html',
-  providers: [ ],
+  providers: [ TrackingService ],
 })
 export class RulesPage {
 
-  constructor() {}
+  constructor(private tracking: TrackingService) {}
 
   ionViewDidLoad() {
+    this.tracking.track("ViewRules");
   }
 
 }

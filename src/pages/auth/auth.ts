@@ -1,47 +1,50 @@
 import { Auth, Push, PushToken, User, UserDetails, IDetailedError } from "@ionic/cloud-angular";
-import { Component, ViewChild } from "@angular/core";
-import { Content, Platform, Tabs, ToastController } from "ionic-angular";
+import { Component } from "@angular/core";
+import { Platform, ToastController } from "ionic-angular";
+
+import { TrackingService } from '../../services/tracking';
 
 interface UserData {
   team_name: string;
 }
 
 @Component({
-   selector: "auth",
-   templateUrl: "auth.html",
-   styles: [`
-     .browser-view {
-       width: 100%;
-       text-align: center;
-     }
-     .android-download {
-       display: block;
-       width: 100%;
-       text-align: center;
-       color: #FCB100;
-       text-decoration: none;
-     }
-     .ios-download {
-       display: block;
-       width: 100%;
-       text-align: center;
-       color: #FCB100;
-       text-decoration: none;
-     }
-     .download-icon {
-       font-size: 500%;
-     }
-     .download-label {
-       width: 100%;
-       font-weight: bold;
-       font-size: 200%;
-       display: block;
-     }
-     .center {
-       text-align: center;
-       width: 100%;
-     }
-   `],
+  providers: [ TrackingService ],
+  selector: "auth",
+  styles: [`
+    .browser-view {
+      width: 100%;
+      text-align: center;
+    }
+    .android-download {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: #FCB100;
+      text-decoration: none;
+    }
+    .ios-download {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: #FCB100;
+      text-decoration: none;
+    }
+    .download-icon {
+      font-size: 500%;
+    }
+    .download-label {
+      width: 100%;
+      font-weight: bold;
+      font-size: 200%;
+      display: block;
+    }
+    .center {
+      text-align: center;
+      width: 100%;
+    }
+  `],
+  templateUrl: "auth.html",
  })
 export class AuthComponent {
   public team_name: string;
@@ -49,13 +52,14 @@ export class AuthComponent {
   public view: string = this.isBrowser() ? "browser" : "signup";
 
   constructor(public auth: Auth, public user: User, private plt: Platform, public push: Push,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController, private tracking: TrackingService) {
     console.log('user authed?', user, auth, auth.isAuthenticated());
     if (auth.isAuthenticated()) {
       this.view = "profile";
+      console.log("user: ", user);
       let userData = user.data.data as UserData;
       this.team_name = userData.team_name;
-      console.log('did load');
+      this.tracking.identify(user.details.email, this.team_name);
       this.registerForPush();
     }
   }
@@ -66,6 +70,8 @@ export class AuthComponent {
       console.info(`Signup success: ${this.user}`);
       this.auth.login("basic", {"email": this.details.email, "password": this.details.password}).then(() => {
         console.info("Login success");
+        this.tracking.identify(this.details.email, this.team_name);
+        this.tracking.track("Signup")
         this.toast("Welcome to Trivia Stats! Good luck!");
 
         this.user.set("team_name", this.team_name);
@@ -74,6 +80,7 @@ export class AuthComponent {
       });
     }, (err: IDetailedError<string[]>) => {
       console.error(`Signup error:`);
+      this.tracking.track('SignupFailure', err.details);
       for (let e of err.details) {
         console.error(e);
         if (e === "conflict_email") {
@@ -95,6 +102,7 @@ export class AuthComponent {
       }
     }).catch((e) => {
       console.error(`Signup server error: ${e}`);
+      this.tracking.track("SignupError");
       this.toast("A server error occurred. Sorry! Try again after the next question.");
     });
   }
@@ -114,6 +122,8 @@ export class AuthComponent {
       this.view = "profile";
       let userData = this.user.data.data as UserData;
       this.team_name = userData.team_name;
+      this.tracking.identify(this.details.email, this.team_name);
+      this.tracking.track("Login");
       this.registerForPush();
     }).catch((e) => {
       console.error(`login error: ${e}`);
@@ -122,6 +132,7 @@ export class AuthComponent {
   }
 
   public logout() {
+    this.tracking.track("Logout");
     this.push.unregister();
     this.auth.logout();
     this.toast("Logged out! Come back soon!");
@@ -140,13 +151,13 @@ export class AuthComponent {
 
   public profileSave() {
     this.user.save().then(() => {
+      this.tracking.track("SaveProfile");
       this.toast("Ok! Saved your profile!");
     });
   }
 
   public scrollTo(id) {
     let element = document.getElementById(id);
-    console.log("SCROLL", element);
     element.scrollIntoView();
   }
 
@@ -165,6 +176,7 @@ export class AuthComponent {
     this.push.register().then((t: PushToken) => {
       return this.push.saveToken(t);
     }).then((t: PushToken) => {
+      this.tracking.track("PushRegister");
       console.log('Token saved:', t.token);
     });
   }
