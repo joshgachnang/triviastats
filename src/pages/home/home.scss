@@ -18,6 +18,15 @@ page-home {
     padding: 10px 0;
   }
 
+  .circle {
+    border-radius: 50%;
+    max-height: 128px;
+    max-width: 128px;
+    display: block;
+    margin: 10px auto;
+    
+  }
+
   // Fix some things on mobile
   @media only screen and (max-width: $max-mobile-width) {
     .scores-content .item-md,

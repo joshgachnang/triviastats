@@ -1,14 +1,16 @@
 import { Mixpanel, MixpanelPeople } from '@ionic-native/mixpanel';
 import { Injectable } from '@angular/core';
 
-
 @Injectable()
 export class TrackingService {
   private MIXPANEL_TOKEN: string = "2c91e16122273e34431402cb3895ea46";
-  constructor(private mixpanel: Mixpanel, private mixpanelPeople: MixpanelPeople) {
+  constructor(private mixpanel: Mixpanel, private mixpanelPeople: MixpanelPeople) {}
+
+  init() {
     this.mixpanel.init(this.MIXPANEL_TOKEN)
       .then(this.onSuccess)
       .catch(this.onError);
+    console.debug('[Mixpanel] Initialized');
   }
 
   identify(email: string, team: string) {
@@ -27,10 +29,10 @@ export class TrackingService {
   }
 
   onSuccess(e) {
-    console.debug("Initialized mixpanel: ", e);
+    console.debug("[Mixpanel] Initialization success: ", e);
   }
 
   onError(e) {
-    console.error("Mixpanel error: ", e);
+    console.error("[Mixpanel] Intitialization error: ", e);
   }
 }

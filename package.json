@@ -25,6 +25,7 @@
     "@ionic/cloud-angular": "^0.11.0",
     "@ionic/storage": "2.0.0",
     "angular2-moment": "^1.2.0",
+    "cordova-plugin-mixpanel": "^2.3.4",
     "ionic-angular": "^2.3.0",
     "ionic-native": "2.4.1",
     "ionicons": "3.0.0",

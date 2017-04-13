@@ -15,23 +15,18 @@ interface UserData {
   selector: 'page-home',
   templateUrl: 'home.html',
   providers: [ ApiService, TrackingService ],
-  styles: [`
-    .circle {
-      border-radius: 50%;
-    }
-  `],
 })
 export class HomePage {
   public scores: Score[] = [];
 
-  constructor(public navCtrl: NavController, public api: ApiService, public deploy: Deploy, public authA: Auth,
-              public userA: User, public plt: Platform, private tracking: TrackingService) {}
+  constructor(public navCtrl: NavController, public api: ApiService, public deploy: Deploy, public auth: Auth,
+              public userService: User, public plt: Platform, private tracking: TrackingService) {}
 
   ionViewDidLoad() {
     this.tracking.track("ViewHome");
-    if (this.authA.isAuthenticated()) {
-      let userData = this.userA.data.data as UserData;
-      this.tracking.identify(this.userA.details.email, userData.team_name);
+    if (this.auth.isAuthenticated()) {
+      let userData = this.userService.data.data as UserData;
+      this.tracking.identify(this.userService.details.email, userData.team_name);
     }
     if (!this.isBrowser()) {
       this.checkForNewVersion();
@@ -54,8 +49,8 @@ export class HomePage {
 
   private checkForNewVersion() {
     console.debug('checking for new app version');
-    if (this.authA.isAuthenticated()) {
-      console.log("checking if we shoudl set channel", this.userA);
+    if (this.auth.isAuthenticated()) {
+      console.log("checking if we shoudl set channel", this.userService);
     }
     this.deploy.check().then((snapshotAvailable: boolean) => {
       if (snapshotAvailable) {

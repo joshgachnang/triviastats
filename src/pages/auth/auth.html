@@ -10,15 +10,15 @@
     <p>Sign up to get notifications when new scores are posted for your team!</p>
       <form (ngSubmit)="signup()">
         <ion-item >
-          <ion-label floating>Email</ion-label>
+          <ion-label>Email</ion-label>
           <ion-input type="text" [(ngModel)]="details.email" name="email" id="email" ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Password</ion-label>
+          <ion-label>Password</ion-label>
           <ion-input type="password" [(ngModel)]="details.password" name="password"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Team Name</ion-label>
+          <ion-label>Team Name</ion-label>
           <ion-input type="text" max-length="36" [(ngModel)]="team_name" name="team_name"></ion-input>
         </ion-item>
         <ion-row>

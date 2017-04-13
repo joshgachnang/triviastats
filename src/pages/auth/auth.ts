@@ -77,6 +77,7 @@ export class AuthComponent {
         this.user.set("team_name", this.team_name);
         this.user.save();
         this.view = "profile";
+        this.registerForPush();
       });
     }, (err: IDetailedError<string[]>) => {
       console.error(`Signup error:`);

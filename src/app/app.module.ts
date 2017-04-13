@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule } from 'ionic-angular';
+import { Mixpanel, MixpanelPeople } from '@ionic-native/mixpanel';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { MyApp } from './app.component';
@@ -11,6 +12,7 @@ import { TeamScorePage } from '../pages/scores/team';
 import { AuthComponent } from '../pages/auth/auth';
 import { RulesPage } from '../pages/rules/rules';
 import { ScoresPage } from '../pages/scores/scores';
+import { SentryErrorHandler } from '../services/error';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -59,6 +61,6 @@ const cloudSettings: CloudSettings = {
     RulesPage,
     ScoresPage,
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: SentryErrorHandler}, Mixpanel, MixpanelPeople]
 })
 export class AppModule {}
