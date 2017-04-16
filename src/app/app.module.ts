@@ -6,13 +6,14 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { CountdownComponent, CountdownPipe, TimeToTriviaPipe } from '../pages/home/countdown.component';
+import { CountdownComponent, CountdownPipe, TimeToTriviaPipe, TriviaHourPipe } from '../pages/home/countdown.component';
 import { TwitterWidgetComponent } from '../pages/home/twitter-widget.component';
 import { TeamScorePage } from '../pages/scores/team';
 import { AuthComponent } from '../pages/auth/auth';
 import { RulesPage } from '../pages/rules/rules';
 import { ScoresPage } from '../pages/scores/scores';
 import { SentryErrorHandler } from '../services/error';
+import { OrdinalPipe } from '../pipes/ordinal.pipe';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -32,8 +33,6 @@ const cloudSettings: CloudSettings = {
   }
 };
 
-
-
 @NgModule({
   declarations: [
     MyApp,
@@ -44,9 +43,11 @@ const cloudSettings: CloudSettings = {
     ScoresPage,
     CountdownComponent,
     TimeToTriviaPipe,
+    TriviaHourPipe,
     CountdownPipe,
     TwitterWidgetComponent,
     AuthComponent,
+    OrdinalPipe,
   ],
   imports: [
     IonicModule.forRoot(MyApp),
