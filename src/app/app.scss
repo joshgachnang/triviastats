@@ -24,3 +24,22 @@ ion-card-header {
 .card-header.ios {
   color: #fff;
 }
+
+@font-face {
+  font-family: Ubuntu;
+  src: url("../assets/fonts/Ubuntu-Regular.ttf");
+}
+
+body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title, ion-card-header {
+  font-family: "Ubuntu", "Roboto", "Helvetica Neue", sans-serif;
+}
+
+ion-title, ion-card-header, .card-header-ios, .card-header-md {
+  font-weight: bold;
+}
+
+ion-content,
+.content-md,
+.content-ios {
+  background-color: #eee;
+}
