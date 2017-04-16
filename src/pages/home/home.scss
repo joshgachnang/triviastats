@@ -7,7 +7,7 @@ page-home {
   }
 
   .twitter-timeline-container {
-    padding: 20px 40px;
+    padding: 20px 10px;
   }
 
   .about p {
@@ -31,12 +31,12 @@ page-home {
   @media only screen and (max-width: $max-mobile-width) {
     .scores-content .item-md,
     .scores-content .item-ios {
-      font-size: 80%;
-      padding-left: 5px;
+   //   font-size: 80%;
+   //   padding-left: 5px;
     }
 
     .scores-content .score {
-      display: none;
+   //   display: none;
     }
   }
 }

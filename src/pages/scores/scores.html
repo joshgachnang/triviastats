@@ -4,25 +4,25 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <form (ngSubmit)="searchTeams()">
+  <form class="search" (ngSubmit)="searchTeams()">
     <ion-item>
       <ion-input placeholder="Search teams.." type="text" [(ngModel)]="searchName" name="searchName"></ion-input>
     </ion-item>
-    <button ion-button outline class="search-button">
-      Search
-    </button>
   </form>
-  <ion-list>
+
+  <ion-list *ngIf="!searchResults" no-lines>
     <span *ngFor="let score of scores" class='score-item'>
-      <button ion-item (click)="teamSelected(score)">
-        <span *ngIf="searchResults">
-          {{ score.team_name }}, {{ score.year }}
-        </span>
-        <span *ngIf="!searchResults">
-          {{ score.place }}: {{ score.team_name }}
-          <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
-        </span>
+      <button ion-item (click)="teamSelected(score)" text-wrap>
+        <span item-left class="place">{{ score.place }}</span>
+        <h2>{{ score.team_name }}</h2>
+        <p class='score' color="secondary">{{ score.score }} points</p>
       </button>
     </span>
+  </ion-list>
+
+  <ion-list text-wrap *ngIf="searchResults">
+    <ion-item (click)="teamSelected(score)">
+      {{ score.team_name }}, {{ score.year }}
+    </ion-item>
   </ion-list>
 </ion-content>

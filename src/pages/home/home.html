@@ -25,15 +25,14 @@
     <ion-row wrap>
       <ion-col col-12 col-lg>
         <ion-card>
-          <ion-card-header color="white">
-            <span class='scores-card-header'> Top Teams for Hour {{ scores[0]?.hour }}, {{ scores[0]?.year }}</span>
+          <ion-card-header color="white" class="scores-card-header">
+            Top Teams for Hour {{ scores[0]?.hour }}, {{ scores[0]?.year }}
           </ion-card-header>
           <ion-card-content class='scores-content'>
             <ion-list>
               <span *ngFor="let score of scores; let i = index;" class='score-item'>
-                <button ion-item *ngIf="i < 10" (click)="teamSelected(score)">
+                <button ion-item text-wrap *ngIf="i < 10" (click)="teamSelected(score)">
                   {{ score.place }}: {{ score.team_name }}
-                  <ion-badge item-right class='score'>{{ score.score }}</ion-badge>
                 </button>
               </span>
             </ion-list>

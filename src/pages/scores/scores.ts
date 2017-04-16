@@ -10,10 +10,18 @@ import { TeamScorePage } from '../scores/team';
   templateUrl: 'scores.html',
   providers: [ ApiService, TrackingService ],
   styles: [`
-    .search-button {
-      /* line up with form above */
-      margin-left: 25px;
+    .search {
+      margin-bottom: 15px;
     }
+    .place {
+      color: purple;
+      min-height: 36px;
+      min-width: 48px;
+      display: block;
+      font-size: 250%;
+      text-align: center;
+    }
+
   `],
 })
 export class ScoresPage {
@@ -41,7 +49,7 @@ export class ScoresPage {
           if (this.searchName) {
             this.title = this.searchName;
           } else {
-            this.title = `Scores for ${this.scores[0].hour}, ${this.scores[0].year}`;
+            this.title = `Hour ${this.scores[0].hour}, ${this.scores[0].year}`;
           }
         });
   }

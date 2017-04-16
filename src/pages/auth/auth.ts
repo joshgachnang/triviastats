@@ -53,7 +53,6 @@ export class AuthComponent {
 
   constructor(public auth: Auth, public user: User, private plt: Platform, public push: Push,
               private toastCtrl: ToastController, private tracking: TrackingService) {
-    console.log('user authed?', user, auth, auth.isAuthenticated());
     if (auth.isAuthenticated()) {
       this.view = "profile";
       console.log("user: ", user);
@@ -78,6 +77,7 @@ export class AuthComponent {
         this.user.save();
         this.view = "profile";
         this.registerForPush();
+        this.details = {};
       });
     }, (err: IDetailedError<string[]>) => {
       console.error(`Signup error:`);
@@ -126,6 +126,7 @@ export class AuthComponent {
       this.tracking.identify(this.details.email, this.team_name);
       this.tracking.track("Login");
       this.registerForPush();
+      this.details = {};
     }).catch((e) => {
       console.error(`login error: ${e}`);
       this.toast("Error logging in, please try again");
@@ -135,8 +136,7 @@ export class AuthComponent {
   public logout() {
     this.tracking.track("Logout");
     this.push.unregister();
-    this.auth.logout();
-    this.toast("Logged out! Come back soon!");
+
     this.view = "signup";
     this.details = {};
     this.team_name = "";

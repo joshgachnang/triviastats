@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, ToastController } from 'ionic-angular';
 import { Auth, Deploy, User } from '@ionic/cloud-angular';
 
 import { TrackingService } from '../../services/tracking';
@@ -20,9 +20,11 @@ export class HomePage {
   public scores: Score[] = [];
 
   constructor(public navCtrl: NavController, public api: ApiService, public deploy: Deploy, public auth: Auth,
-              public userService: User, public plt: Platform, private tracking: TrackingService) {}
+              public userService: User, public plt: Platform, private tracking: TrackingService,
+              private toast: ToastController) {}
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    console.log('home didload');
     this.tracking.track("ViewHome");
     if (this.auth.isAuthenticated()) {
       let userData = this.userService.data.data as UserData;
@@ -52,12 +54,35 @@ export class HomePage {
     if (this.auth.isAuthenticated()) {
       console.log("checking if we shoudl set channel", this.userService);
     }
+    this.deploy.channel = 'dev';
     this.deploy.check().then((snapshotAvailable: boolean) => {
+
       if (snapshotAvailable) {
         console.info('new version available')
         this.deploy.download().then(() => {
           this.tracking.track("DownloadedNewVersion");
           return this.deploy.extract();
+        }).then(() => {
+          this.deploy.getMetadata().then((metadata) => {
+            let msg: string;
+            if (metadata.userMsg) {
+              msg = `New version: ${metadata.userMsg}`;
+            } else {
+              msg = 'New version. Update?';
+            }
+            let reloadToast = this.toast.create({
+              message: msg,
+              duration: 1000 * 1000,
+              position: 'bottom',
+              showCloseButton: true,
+              closeButtonText: 'Update',
+              dismissOnPageChange: true,
+            });
+            reloadToast.onDidDismiss(() => {
+              this.deploy.load();
+            });
+            reloadToast.present();
+          });
         });
       } else {
         console.debug('no new version');
@@ -67,8 +92,10 @@ export class HomePage {
 
   private isBrowser() {
     if (this.plt.is('core') || this.plt.is('mobileweb')) {
+      console.log('IS BROWSER');
       return true;
     }
+    console.log('IS NOT BROWSER');
     return false;
   }
 }
