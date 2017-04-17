@@ -54,7 +54,6 @@ export class HomePage {
     if (this.auth.isAuthenticated()) {
       console.log("checking if we shoudl set channel", this.userService);
     }
-    this.deploy.channel = 'dev';
     this.deploy.check().then((snapshotAvailable: boolean) => {
 
       if (snapshotAvailable) {
