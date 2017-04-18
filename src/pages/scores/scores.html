@@ -15,14 +15,16 @@
       <button ion-item (click)="teamSelected(score)" text-wrap>
         <span item-left class="place">{{ score.place }}</span>
         <h2>{{ score.team_name }}</h2>
-        <p class='score' color="secondary">{{ score.score }} points</p>
+        <p ion-text class='score' color="secondary">{{ score.score }} points</p>
       </button>
     </span>
   </ion-list>
 
   <ion-list text-wrap *ngIf="searchResults">
-    <ion-item (click)="teamSelected(score)">
-      {{ score.team_name }}, {{ score.year }}
-    </ion-item>
+    <span *ngFor="let score of scores" class='score-item'>
+      <ion-item (click)="teamSelected(score)">
+        {{ score.team_name }}, {{ score.year }}
+      </ion-item>
+    </span>
   </ion-list>
 </ion-content>

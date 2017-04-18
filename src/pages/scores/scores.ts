@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { TrackingService } from '../../services/tracking';
 import { ApiService, Score } from '../../services/api';
@@ -32,7 +32,7 @@ export class ScoresPage {
   public searchResults: Boolean = false;
   public title: string;
 
-  constructor(public navCtrl: NavController, public api: ApiService,
+  constructor(public navCtrl: NavController, public api: ApiService, public loadingCtrl: LoadingController,
       private navParams: NavParams, public toastCtrl: ToastController, private tracking: TrackingService) {}
 
   ionViewDidLoad() {
@@ -41,10 +41,14 @@ export class ScoresPage {
     this.tracking.track("ViewScores", {year: this.year, hour: this.hour, searchName: this.searchName});
 
     this.title = "Loading..";
-
+    let loader = this.loadingCtrl.create({
+      content: "Loading scores..",
+    });
+    loader.present();
     this.api.fetchScores(this.year, this.hour)
         .subscribe((scores: Score[]) => {
           console.debug('Fetched scores: ', scores);
+          loader.dismiss().catch(() => {});
           this.scores = scores;
           if (this.searchName) {
             this.title = this.searchName;
@@ -64,8 +68,13 @@ export class ScoresPage {
       return;
     }
     this.tracking.track("SearchTeam", {team_name: this.searchName});
+    let loader = this.loadingCtrl.create({
+      content: "Loading scores..",
+    });
+    loader.present();
     this.api.fetchScores(undefined, undefined, undefined, this.searchName)
         .subscribe((scores: Score[]) => {
+          loader.dismiss().catch(() => {});
           this.searchResults = true;
           console.debug('Fetched scores: ', scores);
           this.scores = [];

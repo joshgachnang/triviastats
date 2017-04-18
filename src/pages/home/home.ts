@@ -24,7 +24,6 @@ export class HomePage {
               private toast: ToastController) {}
 
   ionViewDidEnter() {
-    console.log('home didload');
     this.tracking.track("ViewHome");
     if (this.auth.isAuthenticated()) {
       let userData = this.userService.data.data as UserData;
