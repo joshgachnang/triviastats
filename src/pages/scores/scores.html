@@ -3,7 +3,7 @@
     <ion-title>{{ title }}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding class='score-page'>
   <form class="search row" (ngSubmit)="searchTeams()">
     <ion-item>
       <ion-input placeholder="Search teams.." type="text" [(ngModel)]="searchName" name="searchName"></ion-input>
@@ -16,7 +16,7 @@
     <span *ngFor="let score of scores" class='score-item'>
       <button ion-item (click)="teamSelected(score)" text-wrap>
         <span item-left class="place">{{ score.place }}</span>
-        <h2>{{ score.team_name }}</h2>
+        <h2 class='team-name'>{{ score.team_name }}</h2>
         <p ion-text class='score' color="secondary">{{ score.score }} points</p>
       </button>
     </span>

@@ -15,11 +15,14 @@ import { TeamScorePage } from '../scores/team';
     }
     .place {
       color: purple;
-      min-height: 48px;
+      min-height: 36px;
       min-width: 48px;
       display: block;
       font-size: 250%;
       text-align: center;
+    }
+    .team-name {
+      padding-top: 5px;
     }
 
   `],
