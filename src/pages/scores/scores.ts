@@ -15,7 +15,7 @@ import { TeamScorePage } from '../scores/team';
     }
     .place {
       color: purple;
-      min-height: 36px;
+      min-height: 48px;
       min-width: 48px;
       display: block;
       font-size: 250%;

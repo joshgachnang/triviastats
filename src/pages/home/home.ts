@@ -23,6 +23,10 @@ export class HomePage {
               public userService: User, public plt: Platform, private tracking: TrackingService,
               private toast: ToastController) {}
 
+  ionViewDidLoad() {
+  	this.tracking.init();
+  }
+
   ionViewDidEnter() {
     this.tracking.track("ViewHome");
     if (this.auth.isAuthenticated()) {

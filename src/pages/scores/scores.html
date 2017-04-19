@@ -4,10 +4,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <form class="search" (ngSubmit)="searchTeams()">
+  <form class="search row" (ngSubmit)="searchTeams()">
     <ion-item>
       <ion-input placeholder="Search teams.." type="text" [(ngModel)]="searchName" name="searchName"></ion-input>
     </ion-item>
+    <button ion-button block type="submit">Search</button>
+
   </form>
 
   <ion-list *ngIf="!searchResults" no-lines>
